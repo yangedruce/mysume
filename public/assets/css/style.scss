@@ -1,0 +1,230 @@
+// colors
+$purple-dark: #4C4EAF;
+$purple-light: #989BFE;
+$blue-dark: #96BCD8;
+$blue-light: #CBE9FE;
+$grey-dark: #969696;
+$grey-light: #C4C4C4;
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+select:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none !important;
+    box-shadow: none !important;
+}
+
+// authentication
+.auth {
+    @media (min-width: 1200px) {
+        height: 100vh;
+    }
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+// buttons
+.btn-main {
+    background: $purple-dark;
+    border-radius: 50px;
+}
+
+.btn-main-blue {
+    border: 1px solid $blue-dark;
+    border-radius: 50px;
+}
+
+.btn-main-purple-light {
+    background: $purple-light;
+    border-radius: 20px;
+}
+
+.btn-main-purple-light-2 {
+    background: $purple-light;
+    border-radius: 50px;
+}
+
+.btn-width {
+    width: 175px !important;
+}
+
+// background
+.bg-purple-dark {
+    background: $purple-dark;
+}
+
+// link
+.copy-link {
+    border: 1px solid $grey-light;
+    pointer-events: none;
+    font-size: 14px;
+    &:focus{
+        border-color: $grey-light !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+
+.copy-link-2 {
+    border: 1px solid $grey-light;
+    &:focus{
+        border-color: $grey-light !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+
+// dropdown
+.dropdown-box {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 8px;
+}
+
+// fonts
+.ff-days-one {
+    font-family: 'Days One', sans-serif;
+}
+
+.ff-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ff-kaisei {
+    font-family: 'Kaisei Decol', serif;
+}
+
+.ff-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ff-roboto-mono {
+    font-family: 'Roboto Mono', monospace;
+}
+
+// form
+.form-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 15px;
+}
+
+.input-delete {
+    border: 1px solid $grey-light;
+    font-size: 14px;
+    &:focus{
+        border-color: $grey-light !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+
+// loader
+.loading {
+    background: rgba(0,0,0,0.25);
+    z-index: 2000;
+}
+
+// container box
+.main-box {
+    border-radius: 4px;
+    border: 1px solid $grey-light;
+}
+
+// register
+.register-page {
+    min-height: 100vh;
+
+    @media (min-width: 1200px) {
+        min-height: 100%;
+    }
+}
+
+// text
+.text-blue-light {
+    color: $blue-light !important;
+}
+
+.text-blue-dark {
+    color: $blue-dark !important;
+}
+
+.text-grey-dark {
+    color: $grey-dark !important;
+}
+
+.text-purple-dark {
+    color: $purple-dark !important;
+}
+
+.text-purple-light {
+    color: $purple-light !important;
+}
+
+.text-10 {
+    font-size: 10px;
+}
+
+.text-12 {
+    font-size: 12px;
+}
+
+.text-18 {
+    font-size: 18px;
+}
+
+// container-profile-input
+.main-container {
+    .profile-img-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .profile-circle {
+        border-radius: 1000px !important;
+        border: 3px solid $purple-dark;
+        overflow: hidden;
+    }
+
+    .profile-circle-2 {
+        border-radius: 1000px !important;
+        border: 3px solid $grey-dark;
+        overflow: hidden;
+    }
+
+    .profile-circle-3 {
+        border-radius: 1000px !important;
+        border: 3px solid $blue-light;
+        overflow: hidden;
+    }
+
+    .profile-upload {
+        color: #FFFFFF;
+        background: $purple-dark;
+        border-radius: 1000px !important;
+        width: 50px;
+        height: 50px;
+        z-index: 100;
+    }
+
+    .main-input {
+        padding: 12px;
+        background-color: #FFFFFF;
+        border: 1px solid $grey-light;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+}
