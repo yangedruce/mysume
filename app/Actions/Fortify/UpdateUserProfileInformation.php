@@ -38,7 +38,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $this->updateVerifiedUser($user, $input);
         } else {
             if($user!=null) {
-                if($input['image']!=null){
+                if($input['image'] ?? '' ){
                     if(auth()->user()->profile_picture != NULL){
                         Storage::delete('public/profilepicture/'.auth()->user()->profile_picture);
                     }
@@ -47,15 +47,26 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 }
             }
 
-            $user->forceFill([
-                'fullname'          => $input['name'],
-                'username'          => $input['username'],
-                'phone_no'          => $input['phoneno'],
-                'email'             => $input['email'],
-                'location'          => $input['userlocation'],
-                'website'           => $input['userwebsite'],
-                'profile_picture'   => $profilePicture,
-            ])->save();
+            if($input['image'] ?? '' ){
+                $user->forceFill([
+                    'fullname'          => $input['name'],
+                    'username'          => $input['username'],
+                    'phone_no'          => $input['phoneno'],
+                    'email'             => $input['email'],
+                    'location'          => $input['userlocation'],
+                    'website'           => $input['userwebsite'],
+                    'profile_picture'   => $profilePicture,
+                ])->save();    
+            }else {
+                $user->forceFill([
+                    'fullname'          => $input['name'],
+                    'username'          => $input['username'],
+                    'phone_no'          => $input['phoneno'],
+                    'email'             => $input['email'],
+                    'location'          => $input['userlocation'],
+                    'website'           => $input['userwebsite'],
+                ])->save();    
+            }
 
             request()->session()->flash('success', 'Profile information updated.');
         }

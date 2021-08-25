@@ -47,6 +47,27 @@ class ResumeController extends Controller
         $resume_id  = $request->resume_id;
         $resume     = Resume::where('id', $resume_id)->first();
         $title      = $resume->title;
+
+        $jobs        = Job::where('resume_id', $resume_id)->get();
+        if(count($jobs) > 0){
+            foreach($jobs as $job){
+                $tasks = JobTask::where('job_id', $job->id)->get();
+                $tasks->each->delete();             
+                $achievements = JobAchievement::where('job_id', $job->id)->get();
+                $achievements->each->delete(); 
+                $job->delete();
+            }
+        }
+
+        $educations = Education::where('resume_id', $resume_id)->get();
+        if(count($educations) > 0){
+            foreach($educations as $education){
+                $achievements = EducationAchievement::where('education_id', $job->id)->get();
+                $achievements->each->delete();                      
+                $education->delete();
+            }
+        }
+
         $resume->delete();
         
         $request->session()->flash('success', 'Resume '.$title.' has been deleted.');
@@ -599,9 +620,18 @@ class ResumeController extends Controller
         if($type=='job') {
             $delete     = Job::where('id', $id)->where('resume_id', $resume_id)->first();
             $message    = 'Job '.$delete->company_name;
+
+            $tasks = JobTask::where('job_id', $id)->get();
+            $tasks->each->delete();             
+
+            $achievements = JobAchievement::where('job_id', $id)->get();
+            $achievements->each->delete();  
         }else {
             $delete     = Education::where('id', $id)->where('resume_id', $resume_id)->first();
             $message    = 'Education '.$delete->school;
+
+            $achievements = EducationAchievement::where('education_id', $id)->get();
+            $achievements->each->delete();  
         }
 
         $delete->delete();

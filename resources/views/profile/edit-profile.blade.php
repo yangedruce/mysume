@@ -33,9 +33,7 @@
                     <div class="profile-img-container position-relative mx-auto mb-4">
                         <div class="d-flex justify-content-center align-items-center profile-circle w-100 h-100">
                             @if(Auth::user()->profile_picture==null)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#4C4EAF" class="bi bi-person-fill w-75 m-auto" viewBox="0 0 16 16">
-                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                </svg>
+                                <img src="{{ asset('assets/img').'/user.jpg'}}" alt="" class="profile-avatar mx-auto w-auto h-100 d-block">
                             @else
                                 <img src="{{ asset('storage/profilepicture').'/'.Auth::user()->profile_picture }}" alt="" class="profile-avatar mx-auto w-auto h-100 d-block">
                             @endif
@@ -120,23 +118,25 @@
 @push('js')
 <script>
     // Profile picture
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    $(document).ready(function() {
+        var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('.profile-avatar').attr('src', e.target.result);
+                reader.onload = function (e) {
+                    $('.profile-avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
 
-    $(".img-upload").on('change', function() {
-        readURL(this);
-    });
-    
-    $(".upload-button").on('click', function() {
-        $(".img-upload").click();
+        $(".img-upload").on('change', function() {
+            readURL(this);
+        });
+        
+        $(".upload-button").on('click', function() {
+            $(".img-upload").click();
+        });
     });
 
     // to check existing username and compare before can save/changing
