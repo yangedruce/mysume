@@ -112,6 +112,7 @@
                     mysume
                 </h2>
                 
+                {{-- messages/alerts --}}
                 @if(count($errors) > 0)
                     <ul class="py-3">
                         @foreach($errors->all() as $message)
@@ -124,6 +125,7 @@
                     <div class="fw-bold alert alert-success ff-montserrat py-3 small">{{ session('status') }}</div>
                 @endif
                 
+                {{-- forgot password --}}
                 <form action="{{ route('password.request') }}" method="POST" class="main-container">
                     @csrf
                     <p class="mt-5 ff-montserrat text-white small">Please enter your email address. You will receive a link to create a new password via email.</p>

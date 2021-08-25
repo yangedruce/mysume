@@ -58,6 +58,7 @@ class ResumeController extends Controller
         $user_id    = auth()->user()->id;
         $resume     = Resume::where('id', $resume_id)->where('user_id', $user_id)->first();
 
+        // jobs & educations in latest order while in edit
         if($resume!=null) {
             $education  = Education::where('resume_id', $resume->id)->orderBy('start_year', 'DESC')->orderBy('start_month', 'DESC')->get();
             $job        = Job::where('resume_id', $resume->id)->orderBy('start_year', 'DESC')->orderBy('start_month', 'DESC')->get();
@@ -79,6 +80,7 @@ class ResumeController extends Controller
         $user   = User::where('username', $username)->first();
         $resume = Resume::where('id', $resume_id)->first();
         
+        // jobs & educations in latest order when published
         if($user!=null && $resume!=null && $resume->status=='Published') {
             $education  = Education::where('resume_id', $resume->id)->orderBy('start_year', 'DESC')->orderBy('start_month', 'DESC')->get();
             $job        = Job::where('resume_id', $resume->id)->orderBy('start_year', 'DESC')->orderBy('start_month', 'DESC')->get();
@@ -94,7 +96,7 @@ class ResumeController extends Controller
         }
     }
 
-    // Preview resume
+    // Preview resume with dummy data
     public function previewResume($template) {
         // user
         $user                   = new User;
@@ -259,6 +261,7 @@ class ResumeController extends Controller
         $template   = Template::all();
         $resume     = Resume::where('id', $resume_id)->where('user_id', $user_id)->first();
 
+        // view resume template
         if($resume!=null) {
             return view('resume.create-new-resume')->with([
                 'resume'    => $resume,
@@ -297,6 +300,7 @@ class ResumeController extends Controller
 
         $resume->save();
 
+        // status
         if($status=='Draft') {
             $message = 'Resume '.$resume->title.' has been set as draft.';
         }else {
@@ -341,6 +345,7 @@ class ResumeController extends Controller
         
         $job->save();
 
+        // add job tasks
         for($i = 1; $i < $task_no+1; $i++) {
             $attribute = 'job_task_'.$i;
 
@@ -353,6 +358,7 @@ class ResumeController extends Controller
             }
         }
 
+        // add job achievements
         for($i = 1; $i < $job_achievement_no+1; $i++) {
             $attribute = 'job_achievement_'.$i;
 
@@ -393,6 +399,7 @@ class ResumeController extends Controller
         
         $education->save();
 
+        // add education achievements
         for($i = 1; $i < $education_achievement_no+1; $i++) {
             $attribute = 'education_achievement_'.$i;
 
@@ -424,6 +431,7 @@ class ResumeController extends Controller
         $task_no            = $request->task_no;
         $job_achievement_no = $request->job_achievement_no;
 
+        // currently work on/0
         if($current==null) {
             $current = false;
         }
@@ -437,6 +445,7 @@ class ResumeController extends Controller
         $job->start_year        = $start_year;
         $job->currently_work    = $current;
         
+        // currently work 0
         if(!$current) {
             $job->end_month   = $end_month;
             $job->end_year    = $end_year;
@@ -444,9 +453,11 @@ class ResumeController extends Controller
         
         $job->save();
 
+        // edit job tasks & achievements
         $task           = array();
         $achievement    = array();
 
+        // edit job tasks
         for($i = 1; $i < $task_no+1; $i++) {
             $attribute = 'job_task_id_'.$i;
 
@@ -478,6 +489,7 @@ class ResumeController extends Controller
             }
         }
 
+        // edit job achievements
         for($i = 1; $i < $job_achievement_no+1; $i++) {
             $attribute = 'job_achievement_id_'.$i;
 
@@ -539,6 +551,7 @@ class ResumeController extends Controller
         
         $education->save();
 
+        // education achievements
         $achievement    = array();
 
         for($i = 1; $i < $education_achievement_no+1; $i++) {

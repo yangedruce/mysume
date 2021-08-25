@@ -17,25 +17,35 @@
         <title>{{ $user->fullname }} | {{ $resume->title }}</title>
     </head>
     <body>
+        {{-- include trigger print resume --}}
         @include('layouts.print')
+
+        {{-- dos template --}}
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-xl-10">
                     <div class="row main-container h-100">
                         <div class="col-12 col-xl-3 bg-purple-dark">
+                            {{-- profile picture --}}
                             <div class="py-5">
                                 <div class="profile-img-container position-relative mx-auto p-0">
                                     <div class="d-flex justify-content-center align-items-center profile-circle-3 w-100 h-100 mt-3 mt-xl-0">
-                                        @if($user->profile_picture==null)
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#4C4EAF" class="bi bi-person-fill w-75 m-auto" viewBox="0 0 16 16">
-                                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                            </svg>
+                                        @if(Route::is('resume.preview-resume'))
+                                            <img src="{{ asset('assets/img').'/0000_avatar.jpeg' }}" alt="" class="w-auto h-100 d-block">
                                         @else
-                                            <img src="{{ asset('storage/profilepicture').'/'.$user->profile_picture }}" alt="" class="w-auto h-100 d-block">
+                                            @if($user->profile_picture==null)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#4C4EAF" class="bi bi-person-fill w-75 m-auto" viewBox="0 0 16 16">
+                                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                </svg>
+                                            @else
+                                                <img src="{{ asset('storage/profilepicture').'/'.$user->profile_picture }}" alt="" class="w-auto h-100 d-block">
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- resume information on dos template --}}
                             <div class="m-3 pb-3">
                                 <h1 class="ff-kaisei text-blue-light mb-0">{{ $user->fullname }}</h1>
                                 <p class="ff-roboto-mono fw-bold text-white fs-5 mb-0">{{ $resume->title }}</p>
@@ -73,12 +83,14 @@
                         </div>
                         <div class="col-12 col-xl-9 px-4">
                             <div class="py-3">
+                                {{-- jobs --}}
                                 @if(count($jobs)>0)
                                     <p class="ff-kaisei text-purple-dark fs-5 fw-bold mb-0">Job Experience</p>
                                     @foreach($jobs as $no => $job)
                                             <p class="ff-roboto text-dark fw-bold text-uppercase small mt-3 mb-0">{{ $job->company_name }}</p>
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $job->title }}</p>
 
+                                            {{-- job task --}}
                                             @if(count($job->task)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Tasks/Responsibilities</p>
                                                 <ul class="my-2">
@@ -90,6 +102,7 @@
                                                 </ul>
                                             @endif
 
+                                            {{-- job achievements --}}
                                             @if(count($job->achievement)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
@@ -101,6 +114,7 @@
                                                 </ul>
                                             @endif
                                             
+                                            {{-- work period - currently work --}}
                                             @php
                                                 $start_date     = $job->start_year.'-'.sprintf('%02d', $job->start_month).'-01 00:00:00';
                                                 $start_month    = date('F', strtotime($start_date));
@@ -127,12 +141,14 @@
                                 @endif
                             </div>
                             <div class="py-3">
+                                {{-- educations --}}
                                 @if(count($educations)>0)
                                     <p class="ff-kaisei text-purple-dark fs-5 fw-bold mb-0">Education</p>
                                     @foreach($educations as $no => $education)
                                             <p class="ff-roboto text-dark fw-bold text-uppercase small mt-3 mb-0">{{ $education->school }}</p>
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $education->degree }}</p>
 
+                                            {{-- education achievements --}}
                                             @if(count($education->achievement)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
@@ -144,6 +160,7 @@
                                                 </ul>
                                             @endif
                                             
+                                            {{-- education period --}}
                                             @php
                                                 $start_date     = $education->start_year.'-'.sprintf('%02d', $education->start_month).'-01 00:00:00';
                                                 $start_month    = date('F', strtotime($start_date));

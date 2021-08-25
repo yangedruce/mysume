@@ -14,10 +14,12 @@
             </a>
         </div>
 
+        {{-- messages/alerts --}}
         @if(session('success'))            
             <div class="fw-bold alert alert-success ff-montserrat mt-3 small">{{ session('success') }}</div>
         @endif
 
+        {{-- edit resume --}}
         <div class="main-box mt-4 w-100 p-3">
             <div class="d-flex justify-content-between w-100">
                 <div class="d-flex w-100 justify-content-between">

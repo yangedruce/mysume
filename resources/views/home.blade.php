@@ -26,6 +26,7 @@
             </a>
         </div>
 
+        {{-- messages/alerts --}}
         @if(session('error'))            
             <div class="fw-bold alert alert-danger ff-montserrat mt-3 small">{{ session('error') }}</div>
         @endif
@@ -34,6 +35,7 @@
             <div class="fw-bold alert alert-success ff-montserrat mt-3 small">{{ session('success') }}</div>
         @endif
 
+        {{-- resume on dashboard --}}
         @if(count($resumes)>0)
             @foreach($resumes as $no => $resume)
                 <div class="main-box mt-4 w-100">
@@ -103,6 +105,7 @@
 
 @push('js')
 <script>
+    // delete resume
     function triggerDelete(id, title) {
         $('#deleteTitle').html(title);
         $('#deleteId').val(id);

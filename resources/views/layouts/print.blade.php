@@ -1,3 +1,4 @@
+{{-- trigger print button --}}
 <div class="position-fixed w-100 h-100" id="print">
     <button class="position-absolute top-0 end-0 mt-3 me-3 bg-purple-dark text-white btn rounded-circle px-2 py-1" onclick="triggerPrint()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer mx-1 my-2" viewBox="0 0 16 16">

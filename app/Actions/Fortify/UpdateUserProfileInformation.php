@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
@@ -16,6 +17,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @param  array  $input
      * @return void
      */
+
+    // update profile information and profile picture
     public function update($user, array $input)
     {
         Validator::make($input, [
@@ -34,14 +37,26 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {
+            if($user!=null) {
+                if($input['image']!=null){
+                    if(auth()->user()->profile_picture != NULL){
+                        Storage::delete('public/profilepicture/'.auth()->user()->profile_picture);
+                    }
+                    $profilePicture = time().'_'.auth()->user()->username. '_' . $input['image']->getClientOriginalName();
+                    $input['image']->storeAs('public/profilepicture/', $profilePicture);  // public/folderName if using diff folder
+                }
+            }
+
             $user->forceFill([
-                'fullname'  => $input['name'],
-                'username'  => $input['username'],
-                'phone_no'  => $input['phoneno'],
-                'email'     => $input['email'],
-                'location'  => $input['userlocation'],
-                'website'   => $input['userwebsite'],
+                'fullname'          => $input['name'],
+                'username'          => $input['username'],
+                'phone_no'          => $input['phoneno'],
+                'email'             => $input['email'],
+                'location'          => $input['userlocation'],
+                'website'           => $input['userwebsite'],
+                'profile_picture'   => $profilePicture,
             ])->save();
+
             request()->session()->flash('success', 'Profile information updated.');
         }
     }

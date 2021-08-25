@@ -1,50 +1,57 @@
-# Forstrap
+# Mysume Documentation
 
-Forstrap is a Laravel 8 authentication boilerplate using Fortify package and stylized with Bootstrap 5 CSS framework without the complexity of Jetstream and TailwindCSS and extends Laravel Fortify base features.
+Mysume is a resume builder developed using Laravel 8 and stylized with Bootstrap 5. It features a resume builder with selectable template which can be shared and viewed publicly.
 
-## How To Use This?
+# Setup
 
-Run this command below where app is the folder you want to create your project with.
-
-```shell
-
-composer create-project mkfizi/forstrap app
-
-```
-Run this command after you change you **.env** file
+To setup Mysume in your local machine, simply run this command below where 'app' is the name of the folder of the project.
 
 ```shell
-
-php artisan migrate
-
+git clone https://github.com/yangedruce/mysume.git app
 ```
 
-That's it! Your new app is now ready with authentication features
+Run this command below in your project directory to install all required vendor files .
 
-### Email Configuration
-In order to experience the complete Laravel Fortify and Forstrap authentication features, you must set your email configuration in **.env** file.  You may use [mailtrap.io](https://mailtrap.io/) for development purpose and use it's SMTP integration codes in you **.env** file.
-
-## Extended Feature
-
-Aside from the out of the box Fortify's authentication features, this boilerplate also came with an extended feature which enables the application to send the two factor recovery codes to user's email address. 
-
-### Folder Structure
-The files for this features can be located in these folders
 ```shell
-App
-|Http
-|-Controllers
-|--EmailController.php
-|Mail
-|-TwoFactorRecoveryCodes.php
-Resources
-|Views
-|-Emails
-|--two-factor-recovery-codes.blade.php
+composer install
 ```
 
-### Route
-The route for this feature can be located in web.php with this line
+Run this command below in your project directory to create .env file.
+
 ```shell
-Route::post('/user/two-factor-recovery-codes/email', 'App\Http\Controllers\EmailController@sendTwoFactorRecoveryCodes')->name('two-factor-recovery-codes.send');
+cp .env.example .env
 ```
+
+Run this command below in your project directory to generate key in .env file.
+
+```shell
+php artisan key:generate
+```
+
+In order for Mysume to work, you must set your email configuration in .env file. You may use [mailtrap.io](http://mailtrap.io/) for development purpose and use it's SMTP integration codes in your .env file.
+
+Next, you may create a corresponding database using a Database Management System and setup the configurations for the database in your .env file.
+
+After completing the steps above, simply run this command below.
+
+```shell
+php artisan config:cache
+```
+
+Migrate the tables and required seeder file to your database using the command below.
+
+```shell
+php artisan migrate --seed
+```
+
+Run command below to setup link for storage files
+
+```markdown
+php artisan storage:link
+```
+
+[The wireframes and design](https://www.figma.com/file/zsQqGrYLO1sjGQWb6hBSoF/Resume-Builder-Mysume?node-id=0%3A1)
+
+You may view the app live [here](https://www.mysume.com/)
+
+That's it! Your own Mysume app is now ready.

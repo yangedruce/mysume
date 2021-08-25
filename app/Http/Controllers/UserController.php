@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-
+    // home
     public function home(Request $request) {
         $resume = Resume::where('user_id', auth()->user()->id)
                         ->get();
@@ -20,6 +20,7 @@ class UserController extends Controller
                 ]);
     }
 
+    // check username
     public function checkUsername(Request $request) {
         $user = User::where('username', $request->username)
                     ->first();
@@ -31,6 +32,7 @@ class UserController extends Controller
         }
     }
 
+    // Check username profile
     public function checkUsernameProfile(Request $request) {
         $user = User::where('username', $request->username)
                     ->where('username', '!=', auth()->user()->username)
@@ -42,24 +44,4 @@ class UserController extends Controller
             return true;
         }
     } 
-
-    public function uploadProfilePicture(Request $request) {
-        $user = User::where('id', auth()->user()->id)
-                    ->first();
-
-        if($user!=null) {
-            if($request->image!=null){
-                if(auth()->user()->profile_picture != NULL){
-                    Storage::delete('public/profilepicture/'.auth()->user()->profile_picture);
-                }
-                $profilePicture = time().'_'.auth()->user()->username. '_' . $request->image->getClientOriginalName();
-                $request->image->storeAs('public/profilepicture/', $profilePicture);  // public/folderName if using diff folder
-                $user->profile_picture = $profilePicture;
-            }
-            $user->save();
-        }
-
-        $request->session()->flash('success', 'Profile picture has been uploaded.');
-        return redirect()->back();
-    }
 }

@@ -108,6 +108,7 @@
                     </svg>
                 </div>
 
+                {{-- messages/alerts --}}
                 @if(count($errors) > 0)
                     <ul class="py-3">
                         @foreach($errors->all() as $message)
@@ -120,6 +121,7 @@
                     <div class="fw-bold alert alert-success ff-montserrat py-3 small">{{ session('status') }}</div>
                 @endif
                 
+                {{-- register --}}
                 <form action="{{ url('register') }}" method="POST" id="formRegister">
                     @csrf
                     <div class="form-group my-3">
@@ -161,6 +163,7 @@
 
 @push('js')
 <script>
+    // to check existing username and compare before can register
     function checkUsername() {
         $.ajax({
             type: "GET",

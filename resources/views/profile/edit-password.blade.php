@@ -8,6 +8,8 @@
 <div class="row justify-content-center mt-4">
     <div class="col-12 col-xl-6">
         <h1 class="text-dark fs-4 ff-days-one">Update Password</h1>
+
+        {{-- messages/alerts --}}
         @if($errors->hasBag('updatePassword'))
             <ul>
                 @foreach ($errors->updatePassword->all() as $message)
@@ -16,6 +18,7 @@
             </ul>
         @endif        
 
+        {{-- update password --}}
         @if(session('status'))         
             <div class="fw-bold alert alert-success ff-montserrat small">{{ __('Your password has been updated.') }}</div>
         @endif

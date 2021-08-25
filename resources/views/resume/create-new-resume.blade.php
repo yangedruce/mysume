@@ -8,6 +8,7 @@
 <div class="row justify-content-center mt-4">
     <div class="col-12 col-xl-6">
 
+        {{-- checking either it is create new resume or edit resume settings --}}
         @if($resume ?? '')
             <h1 class="text-dark fs-4 ff-days-one">Edit Resume Settings</h1> 
         @else
@@ -15,12 +16,15 @@
         @endif
 
         <div class="justify-content-center mt-5">
+            {{-- checking either it is create new resume or edit resume settings --}}
             @if($resume ?? '')
                 <form action="{{ route('resume.update-resume-settings') }}" method="POST">
             @else
                 <form action="{{ route('resume.create-new-resume') }}" method="POST">
             @endif
                 @csrf
+
+                {{-- resume create/edit --}}
                 @if($resume ?? '')
                     <input type="hidden" value="{{ $resume->id }}" name="resume_id">
                 @endif
@@ -61,12 +65,13 @@
                         </div>
                     @endforeach
 
+                    {{-- checking either it is create new resume or edit resume settings (save - edit) (continue-create new) --}}
                     <div class="text-center mt-5">
                         <button type="submit" class="btn btn-main btn-width text-white m-2">
                             <small>
 
                             @if($resume ?? '')
-                                {{ __('Save') }}
+                                {{ __('Save') }} 
                             @else
                                 {{ __('Continue') }}
                             @endif

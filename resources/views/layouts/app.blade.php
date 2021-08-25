@@ -17,6 +17,7 @@
 
 </head>
 <body>
+    {{-- loading --}}
     <div class="position-fixed vw-100 vh-100 d-none loading" id="loading">
         <div class="d-flex justify-content-center align-items-center w-100 h-100">
             <div class="spinner-border text-purple-dark" role="status">
@@ -25,6 +26,7 @@
         </div>
     </div>
 
+    {{-- content --}}
     @yield('content')
     
     <script src="{{ asset('assets/js') }}/popper.min.js"></script>

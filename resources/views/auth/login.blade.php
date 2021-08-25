@@ -112,6 +112,7 @@
                     mysume
                 </h2>
 
+                {{-- messages/alerts --}}
                 @if(count($errors) > 0)
                     <ul class="py-3">
                         @foreach($errors->all() as $message)
@@ -124,6 +125,7 @@
                     <div class="fw-bold alert alert-success ff-montserrat py-3 small">{{ session('status') }}</div>
                 @endif
                 
+                {{-- login --}}
                 <form action="{{ url('login') }}" method="POST" class="main-container">
                     @csrf
                     <div class="form-group mt-3 mb-3">

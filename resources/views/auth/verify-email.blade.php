@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="container-fluid container-bg bg-purple-dark py-5">
-    <div class="row justify-content-center">
+<div class="container-fluid bg-purple-dark register-page">
+    <div class="row justify-content-center h-100 py-5">
         <div class="col-12 col-xl-6">
             <div class="form-container p-5">
                 <div class="text-center">
@@ -108,10 +108,12 @@
                     </svg>
                 </div> 
 
+                {{-- message/alerts --}}
                 @if(session('status'))            
                     <div class="fw-bold alert alert-success ff-montserrat py-3 small">{{ __('A new verification link has been sent to your email address.') }}</div>
                 @endif
                 
+                {{-- verify email --}}
                 <form action="{{ route('verification.send') }}" method="POST">
                     @csrf
                     <div class="ff-montserrat text-dark mt-5 mb-3 small">

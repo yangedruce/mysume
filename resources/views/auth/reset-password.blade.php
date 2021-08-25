@@ -112,6 +112,7 @@
                     mysume
                 </h2>
 
+                {{-- messages/alerts --}}
                 @if(count($errors) > 0)
                     <ul class="py-3">
                         @foreach($errors->all() as $message)
@@ -119,7 +120,8 @@
                         @endforeach
                     </ul>
                 @endif  
-                      
+                
+                {{-- reset password --}}
                 <form action="{{ route('password.update') }}" method="POST" class="main-container">
                     @csrf
                     <input type="hidden" name="token" value="{{ request()->route('token') }}" >

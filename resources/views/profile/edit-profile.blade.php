@@ -18,11 +18,18 @@
                 <button type="button" class="btn btn-main btn-width text-white ff-montserrat"><small>{{ __('Update Password') }}</small></button>
             </a>
         </div>
+
+        {{-- edit profile --}}
         <div class="justify-content-center mt-5">
             <div class="main-container justify-content-center">
-                <form action="{{ route('profile.upload') }}" method="POST" id="formImage" enctype="multipart/form-data">
+
+                {{-- edit profile information --}}
+                <form action="{{ route('user-profile-information.update') }}" method="POST" id="formText" enctype="multipart/form-data">
                     @csrf
-                    <input type="file" onchange="uploadPicture()" name="image" id="img-file" class="img-upload d-none" accept="image/*" multiple>
+                    @method('PUT')
+
+                    {{-- profile picture --}}
+                    <input type="file" name="image" id="img-file" class="img-upload d-none" accept="image/*" multiple>
                     <div class="profile-img-container position-relative mx-auto mb-4">
                         <div class="d-flex justify-content-center align-items-center profile-circle w-100 h-100">
                             @if(Auth::user()->profile_picture==null)
@@ -45,22 +52,20 @@
                             </svg>
                         </button>
                     </div>
-                </form>
                 
-                @if(count($errors) > 0)
-                    <ul>
-                        @foreach($errors->all() as $message)
-                            <li class="fw-bold alert alert-danger ff-montserrat small">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                @endif        
+                    {{-- messages/alerts --}}
+                    @if(count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $message)
+                                <li class="fw-bold alert alert-danger ff-montserrat small">{{ $message }}</li>
+                            @endforeach
+                        </ul>
+                    @endif        
 
-                @if(session('success'))            
-                    <div class="fw-bold alert alert-success ff-montserrat small">{{ session('success') }}</div>
-                @endif
-                <form action="{{ route('user-profile-information.update') }}" method="POST" id="formText">
-                    @csrf
-                    @method('PUT')
+                    @if(session('success'))            
+                        <div class="fw-bold alert alert-success ff-montserrat small">{{ session('success') }}</div>
+                    @endif
+
                     <div class="form-group mt-4">
                         <label for="" class="text-dark ff-days-one"><small>Full Name</small></label>
                         <input type="text" class="form-control main-input ff-montserrat small" id="inputName" name="name" value="{{ Auth::user()->fullname }}" required>
@@ -86,12 +91,14 @@
                         <label for="" class="text-dark ff-days-one"><small>Website</small></label>
                         <input type="text" class="form-control main-input ff-montserrat small" id="userWebsite" name="userwebsite" value="{{ Auth::user()->website }}">
                     </div>
-                    <div class="d-flex justify-content-center mt-5">
-                        <button type="button" class="btn btn-main btn-width me-3 text-white" data-bs-toggle="modal" data-bs-target="#saveProfileModal"><small>{{ __('Save Profile') }}</small></button>
+                    <div class="d-flex justify-content-center align-items-center mt-5 flex-column flex-md-row">
+                        <button type="button" class="btn btn-main btn-width m-2 text-white" data-bs-toggle="modal" data-bs-target="#saveProfileModal"><small>{{ __('Save Profile') }}</small></button>
                         <a href="{{ route('profile.edit') }}">
-                            <button type="button" class="btn btn-main-blue btn-width text-blue-dark"><small>{{ __('Cancel') }}</small></button>
+                            <button type="button" class="btn btn-main-blue btn-width m-2 text-blue-dark"><small>{{ __('Cancel') }}</small></button>
                         </a>
                     </div>
+
+                    {{-- save profile modal --}}
                     <div class="modal fade" id="saveProfileModal" tabindex="-1" aria-labelledby="saveProfileModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content text-center">
@@ -113,28 +120,26 @@
 @push('js')
 <script>
     // Profile picture
-    $(document).ready(function() {
-        var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('.profile-avatar').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
+            reader.onload = function (e) {
+                $('.profile-avatar').attr('src', e.target.result);
             }
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 
-        $(".img-upload").on('change', function() {
-            readURL(this);
-        });
-        
-        $(".upload-button").on('click', function() {
+    $(".img-upload").on('change', function() {
+        readURL(this);
+    });
+    
+    $(".upload-button").on('click', function() {
         $(".img-upload").click();
-        });
     });
 
-    // Check username
+    // to check existing username and compare before can save/changing
     function checkUsername() {
         $.ajax({
             type: "GET",
@@ -170,10 +175,6 @@
                 }
             }
         });
-    }
-
-    function uploadPicture() {
-        $('#formImage').submit();
     }
 </script>
 @endpush

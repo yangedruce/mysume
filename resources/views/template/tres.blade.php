@@ -17,10 +17,15 @@
         <title>{{ $user->fullname }} | {{ $resume->title }}</title>
     </head>
     <body>
+        {{-- include trigger print resume --}}
         @include('layouts.print')
+
+        {{-- tres template --}}
         <div class="container-fluid py-3">
             <div class="row justify-content-center">
                 <div class="col-12 col-xl-10">
+
+                    {{-- resume information on dos template --}}
                     <div class="row">
                         <div class="col-12">
                             <h1 class="ff-kaisei text-blue-dark mb-0">{{ $user->fullname }}</h1>
@@ -64,6 +69,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-xl-8 py-3">
+
+                            {{-- jobs --}}
                             <div>
                                 @if(count($jobs)>0)
                                     <p class="ff-kaisei text-blue-dark fs-5 fw-bold mb-0">Job Experience</p>
@@ -71,6 +78,7 @@
                                             <p class="ff-roboto text-dark fw-bold text-uppercase small mt-3 mb-0">{{ $job->company_name }}</p>
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $job->title }}</p>
 
+                                            {{-- job tasks --}}
                                             @if(count($job->task)>0)
                                                 <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-0">Tasks/Responsibilities</p>
                                                 <ul class="my-2">
@@ -82,6 +90,7 @@
                                                 </ul>
                                             @endif
 
+                                            {{-- job achievements --}}
                                             @if(count($job->achievement)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
@@ -93,6 +102,7 @@
                                                 </ul>
                                             @endif
                                             
+                                            {{-- job period - currently work --}}
                                             @php
                                                 $start_date     = $job->start_year.'-'.sprintf('%02d', $job->start_month).'-01 00:00:00';
                                                 $start_month    = date('F', strtotime($start_date));
@@ -120,6 +130,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-xl-4 py-3">
+
+                            {{-- educations --}}
                             <div>
                                 @if(count($educations)>0)
                                     <p class="ff-kaisei text-blue-dark fs-5 fw-bold mb-0">Education</p>
@@ -127,6 +139,7 @@
                                             <p class="ff-roboto text-dark fw-bold text-uppercase small mt-3 mb-0">{{ $education->school }}</p>
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $education->degree }}</p>
 
+                                            {{-- education achievements --}}
                                             @if(count($education->achievement)>0)
                                                 <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
@@ -138,6 +151,7 @@
                                                 </ul>
                                             @endif
                                             
+                                            {{-- education period --}}
                                             @php
                                                 $start_date     = $education->start_year.'-'.sprintf('%02d', $education->start_month).'-01 00:00:00';
                                                 $start_month    = date('F', strtotime($start_date));

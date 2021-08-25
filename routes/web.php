@@ -21,9 +21,6 @@ Route::middleware(['auth', 'verified'])->group(function (){
     // Edit profile page
     Route::view('/profile/edit', 'profile.edit-profile')->name('profile.edit');
 
-    // Upload profile picture
-    Route::post('/profile/upload', 'App\Http\Controllers\UserController@uploadProfilePicture')->name('profile.upload');
-
     // Check username in profile already exist
     Route::get('/user/check-username-profile', 'App\Http\Controllers\UserController@checkUsernameProfile')->name('user.check-username-profile');
 

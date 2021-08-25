@@ -17,6 +17,7 @@
 
 </head>
 <body>
+    {{-- loading --}}
     <div class="position-fixed vw-100 vh-100 d-none loading" id="loading">
         <div class="d-flex justify-content-center align-items-center w-100 h-100">
             <div class="spinner-border text-purple-dark" role="status">
@@ -24,6 +25,8 @@
             </div>
         </div>
     </div>
+
+    {{-- logout --}}
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -38,6 +41,8 @@
             </div>
         </div>
     </form>
+
+    {{-- navbar --}}
     <nav class="navbar navbar-expand-lg bg-purple-dark sticky-top">
         <div class="container-fluid d-flex justify-content-between w-100">
             <a class="navbar-brand fs-3 text-blue-light ff-days-one text-decoration-none" href="{{ route('home') }}">mysume</a>
@@ -57,13 +62,17 @@
             </div>
         </div>
     </nav>
+
+    {{-- navbar --}}
     <div class="container py-5 min-vh-100">
         @yield('content')
     </div>
+
+    {{-- footer --}}
     <footer class="text-center bg-purple-dark w-100 bottom-0">
         <div class="text-center text-white p-4 small">
             © 2021
-            <a href="#" class="text-decoration-none text-blue-light">www.mysume.com<span class="text-white"> | Design & Developed By </span><a href="https://www.yangedruce.com" class="text-decoration-none text-blue-light">Yang Edruce</a></a>
+            <span class="text-blue-light">www.mysume.com<span class="text-white"> | Design & Developed By </span><a href="https://www.yangedruce.com" class="text-decoration-none text-blue-light">Yang Edruce</a></span>
         </div>
     </footer>
 
