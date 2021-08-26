@@ -49,19 +49,19 @@
                             <ul class="dropdown-menu bg-transparent py-0" aria-labelledby="dropdownMenuButton" style="border: none;">
                                 
                                 @if($resume->status=='Published')
-                                    <li class="w-75">
-                                        <a class="dropdown-item dropdown-box" href="{{ route('resume.view-resume', ['username' => Auth::user()->username, 'resume_id' => $resume->id]) }}" target="_blank"><small>View</small></a>
+                                    <li class="w-100">
+                                        <a class="dropdown-item dropdown-box" href="{{ route('resume.view-resume', ['username' => Auth::user()->username, 'resume_id' => $resume->id]) }}" target="_blank"><small>View Resume</small></a>
                                     </li>
                                 @endif
 
-                                <li class="w-75">
+                                <li class="w-100">
                                     @if($resume->status=='Published')
-                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Draft')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Make Draft</small></button>
+                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Draft')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Make As Draft</small></button>
                                     @else
-                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Published')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Publish</small></button>  
+                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Published')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Publish Resume</small></button>  
                                     @endif
                                 </li>
-                                <li class="w-75"><a class="dropdown-item dropdown-box" href="{{ route('resume.view-edit-resume-settings', $resume->id) }}"><small>Settings</small></a></li>
+                                <li class="w-100"><a class="dropdown-item dropdown-box" href="{{ route('resume.view-edit-resume-settings', $resume->id) }}"><small>Resume Settings</small></a></li>
                             </ul>
                         </div>
                     </div>
