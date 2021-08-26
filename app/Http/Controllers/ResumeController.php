@@ -62,7 +62,7 @@ class ResumeController extends Controller
         $educations = Education::where('resume_id', $resume_id)->get();
         if(count($educations) > 0){
             foreach($educations as $education){
-                $achievements = EducationAchievement::where('education_id', $job->id)->get();
+                $achievements = EducationAchievement::where('education_id', $education->id)->get();
                 $achievements->each->delete();                      
                 $education->delete();
             }
