@@ -15,7 +15,7 @@
         </div>
 
         {{-- messages/alerts --}}
-        @if(session('success'))            
+        @if(session('success'))
             <div class="fw-bold alert alert-success ff-montserrat mt-3 small">{{ session('success') }}</div>
         @endif
 
@@ -36,21 +36,21 @@
                             <svg class="me-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.83301 4.16675L8.24967 4.75008H5.33301V5.91675H5.91634V14.6667C5.91634 14.9721 6.02799 15.282 6.24902 15.5007C6.46777 15.7218 6.77767 15.8334 7.08301 15.8334H12.9163C13.2217 15.8334 13.5316 15.7218 13.7526 15.5007C13.9714 15.282 14.083 14.9721 14.083 14.6667V5.91675H14.6663V4.75008H11.7497L11.1663 4.16675H8.83301ZM7.08301 5.91675H12.9163V14.6667H7.08301V5.91675ZM8.24967 7.08342V13.5001H9.41634V7.08342H8.24967ZM10.583 7.08342V13.5001H11.7497V7.08342H10.583Z" fill="#4C4EAF"/>
                                 <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                            </svg>  
-                        </button>                     
+                            </svg>
+                        </button>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg width="4" height="16" viewBox="0 0 4 16" fill="#000000" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="2" cy="2" r="2" fill="black"/>
                                     <circle cx="2" cy="8" r="2" fill="black"/>
                                     <circle cx="2" cy="14" r="2" fill="black"/>
-                                </svg>                            
+                                </svg>
                             </button>
                             <ul class="dropdown-menu bg-transparent py-0" aria-labelledby="dropdownMenuButton" style="border: none;">
-                                
+
                                 @if($resume->status=='Published')
                                     <li class="w-100">
-                                        <a class="dropdown-item dropdown-box" href="{{ route('resume.view-resume', ['username' => Auth::user()->username, 'resume_id' => $resume->id]) }}" target="_blank"><small>View Resume</small></a>
+                                        <a class="dropdown-item dropdown-box" href="{{ route('resume.view-resume', ['user' => Auth::user()->username, 'resume' => $resume->id]) }}" target="_blank"><small>View Resume</small></a>
                                     </li>
                                 @endif
 
@@ -58,7 +58,7 @@
                                     @if($resume->status=='Published')
                                         <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Draft')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Make As Draft</small></button>
                                     @else
-                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Published')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Publish Resume</small></button>  
+                                        <button type="button" class="dropdown-item dropdown-box" onclick="triggerChangeStatus('Published')" data-bs-toggle="modal" data-bs-target="#statusModal"><small>Publish Resume</small></button>
                                     @endif
                                 </li>
                                 <li class="w-100"><a class="dropdown-item dropdown-box" href="{{ route('resume.view-edit-resume-settings', $resume->id) }}"><small>Resume Settings</small></a></li>
@@ -69,7 +69,7 @@
             </div>
             <div>
                 <div class="input-group mt-3">
-                    <input type="text" class="form-control py-1 ff-montserrat border-end-0 copy-link" id="url" value="{{ route('resume.view-resume', ['username' => Auth::user()->username, 'resume_id' => $resume->id]) }}">
+                    <input type="text" class="form-control py-1 ff-montserrat border-end-0 copy-link" id="url" value="{{ route('resume.view-resume', ['user' => Auth::user()->username, 'resume' => $resume->id]) }}">
                     <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 copy-link-2">
                         <button type="button" onclick="copyLink()" class="btn text-blue-dark fw-bold ff-montserrat"><small>{{ __('Copy link') }}</small></button>
                     </span>
@@ -97,7 +97,7 @@
                     @csrf
                     <input type="hidden" name="resume_id" value="{{ $resume->id }}">
                     <div class="main-container justify-content-center">
-                        <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Add Job Experience</p> 
+                        <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Add Job Experience</p>
                         <div class="form-group mt-4 mb-3">
                             <label for="" class="text-dark ff-days-one"><small>Company Name</small></label>
                             <input type="text" class="form-control main-input ff-montserrat small" id="companyName" name="company_name" value="" required>
@@ -176,7 +176,7 @@
                         <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-0 small">You have no job task yet. Please add a new job task.</p>
 
                         <div id="addJobTask-0"></div>
-                        
+
                         {{-- Add/cancel job achievement --}}
                         <div class="d-flex justify-content-between align-items-center mt-5">
                             <small class="text-dark ff-days-one">Achievement</small>
@@ -231,18 +231,18 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="d-flex align-items-center">                     
+                        <div class="d-flex align-items-center">
                             <button type="button" class="bg-transparent border-0" onclick="triggerEditJob({{$no}})">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.7415 4.16675C13.5911 4.16675 13.443 4.22371 13.3291 4.33765L4.75 12.9167V15.2501H7.08333L15.6624 6.67098C15.8903 6.44312 15.8903 6.07397 15.6624 5.84611L14.154 4.33765C14.04 4.22371 13.8919 4.16675 13.7415 4.16675ZM13.7415 5.57495L14.4251 6.25855L13.6709 7.01278L12.9873 6.32918L13.7415 5.57495ZM12.1624 7.15405L12.846 7.83765L6.60026 14.0834H5.91667V13.3998L12.1624 7.15405Z" fill="#4C4EAF"/>
                                     <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                </svg>                            
+                                </svg>
                             </button>
                             <button type="button" class="bg-transparent border-0" onclick="triggerDeleteJobEducation({{ $job->resume_id }}, {{ $job->id }}, '{{ $job->company_name }}', 'job')" data-bs-toggle="modal" data-bs-target="#deleteJobEducationModal">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.83301 4.16675L8.24967 4.75008H5.33301V5.91675H5.91634V14.6667C5.91634 14.9721 6.02799 15.282 6.24902 15.5007C6.46777 15.7218 6.77767 15.8334 7.08301 15.8334H12.9163C13.2217 15.8334 13.5316 15.7218 13.7526 15.5007C13.9714 15.282 14.083 14.9721 14.083 14.6667V5.91675H14.6663V4.75008H11.7497L11.1663 4.16675H8.83301ZM7.08301 5.91675H12.9163V14.6667H7.08301V5.91675ZM8.24967 7.08342V13.5001H9.41634V7.08342H8.24967ZM10.583 7.08342V13.5001H11.7497V7.08342H10.583Z" fill="#4C4EAF"/>
                                     <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                </svg>  
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                             <input type="hidden" name="resume_id" value="{{ $resume->id }}">
                             <input type="hidden" name="job_id" value="{{ $job->id }}">
                             <div class="main-container justify-content-center">
-                                <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Edit Job Experience</p> 
+                                <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Edit Job Experience</p>
                                 <div class="form-group mt-4 mb-3">
                                     <label for="" class="text-dark ff-days-one"><small>Company Name</small></label>
                                     <input type="text" class="form-control main-input ff-montserrat small" id="companyName" name="company_name" value="{{ $job->company_name }}" required>
@@ -326,14 +326,14 @@
                                         </small>
                                     </button>
                                 </div>
-                                
+
                                 <input type="hidden" id="addJobTaskNo-{{$no}}" name="task_no" value="{{ count($job->task) }}">
                                 <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-{{$no}} small
                                 @if(count($job->task)>0)
                                     d-none
                                 @endif
                                 ">You have no job task yet. Please add a new job task.</p>
-                                
+
                                 <div id="addJobTask-{{$no}}">
                                     @foreach($job->task as $i => $task)
                                         <div class="input-group my-3" id="jobTask-{{$no}}-{{++$i}}">
@@ -344,7 +344,7 @@
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>
                                                         <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                                    </svg>                                    
+                                                    </svg>
                                                 </button>
                                             </span>
                                         </div>
@@ -379,7 +379,7 @@
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>
                                                         <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                                    </svg>                                    
+                                                    </svg>
                                                 </button>
                                             </span>
                                         </div>
@@ -415,7 +415,7 @@
                     @csrf
                     <input type="hidden" name="resume_id" value="{{ $resume->id }}">
                     <div class="main-container justify-content-center">
-                        <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Add Education</p> 
+                        <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Add Education</p>
                         <div class="form-group mt-4 mb-3">
                             <label for="" class="text-dark ff-days-one"><small>School</small></label>
                             <input type="text" class="form-control main-input ff-montserrat small" id="school" name="school" value="" required>
@@ -525,18 +525,18 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="d-flex align-items-center">                     
+                        <div class="d-flex align-items-center">
                             <button type="button" class="bg-transparent border-0" onclick="triggerEditEducation({{$no}})">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.7415 4.16675C13.5911 4.16675 13.443 4.22371 13.3291 4.33765L4.75 12.9167V15.2501H7.08333L15.6624 6.67098C15.8903 6.44312 15.8903 6.07397 15.6624 5.84611L14.154 4.33765C14.04 4.22371 13.8919 4.16675 13.7415 4.16675ZM13.7415 5.57495L14.4251 6.25855L13.6709 7.01278L12.9873 6.32918L13.7415 5.57495ZM12.1624 7.15405L12.846 7.83765L6.60026 14.0834H5.91667V13.3998L12.1624 7.15405Z" fill="#4C4EAF"/>
                                     <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                </svg>                            
+                                </svg>
                             </button>
                             <button type="button" class="bg-transparent border-0" onclick="triggerDeleteJobEducation({{ $education->resume_id }}, {{ $education->id }}, '{{ $education->school }}', 'education')" data-bs-toggle="modal" data-bs-target="#deleteJobEducationModal">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.83301 4.16675L8.24967 4.75008H5.33301V5.91675H5.91634V14.6667C5.91634 14.9721 6.02799 15.282 6.24902 15.5007C6.46777 15.7218 6.77767 15.8334 7.08301 15.8334H12.9163C13.2217 15.8334 13.5316 15.7218 13.7526 15.5007C13.9714 15.282 14.083 14.9721 14.083 14.6667V5.91675H14.6663V4.75008H11.7497L11.1663 4.16675H8.83301ZM7.08301 5.91675H12.9163V14.6667H7.08301V5.91675ZM8.24967 7.08342V13.5001H9.41634V7.08342H8.24967ZM10.583 7.08342V13.5001H11.7497V7.08342H10.583Z" fill="#4C4EAF"/>
                                     <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                </svg>  
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -546,7 +546,7 @@
                             <input type="hidden" name="resume_id" value="{{ $resume->id }}">
                             <input type="hidden" name="education_id" value="{{ $education->id }}">
                             <div class="main-container justify-content-center">
-                                <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Edit Education</p> 
+                                <p class="text-grey-dark fw-bold text-uppercase text-12 ff-montserrat">Edit Education</p>
                                 <div class="form-group mt-4 mb-3">
                                     <label for="" class="text-dark ff-days-one"><small>School</small></label>
                                     <input type="text" class="form-control main-input ff-montserrat small" id="school" name="school" value="{{ $education->school }}" required>
@@ -634,7 +634,7 @@
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>
                                                         <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                                    </svg>                                    
+                                                    </svg>
                                                 </button>
                                             </span>
                                         </div>
@@ -655,7 +655,7 @@
     </div>
 </div>
 {{-- Start delete modal --}}
-<form action="{{ route('resume.delete') }}" method="POST">
+<form action="{{ route('resume.delete', $resume) }}" method="POST">
     @csrf
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -693,7 +693,7 @@
 {{-- End delete modal --}}
 
 {{-- Start change status modal --}}
-<form action="{{ route('resume.update-resume-status') }}" method="POST">
+<form action="{{ route('resume.update-resume-status', $resume) }}" method="POST">
     @csrf
     <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -749,7 +749,7 @@
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+
                                     '<path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>'+
                                     '<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>'
-                                '</svg>'+                                    
+                                '</svg>'+
                             '</button>'+
                         '</span>'+
                     '</div>';
@@ -827,7 +827,7 @@
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+
                                     '<path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>'+
                                     '<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>'
-                                '</svg>'+                                    
+                                '</svg>'+
                             '</button>'+
                         '</span>'+
                     '</div>';
@@ -955,7 +955,7 @@
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+
                                     '<path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>'+
                                     '<rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>'
-                                '</svg>'+                                    
+                                '</svg>'+
                             '</button>'+
                         '</span>'+
                     '</div>';
@@ -1035,7 +1035,7 @@
             btn     = 'Make Draft';
         }else {
             title   = 'publish';
-            btn     = 'Publish';    
+            btn     = 'Publish';
         }
 
         $('#statusTitle').html(title);
