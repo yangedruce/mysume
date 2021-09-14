@@ -62,4 +62,4 @@ Route::get('/user/check-username-profile', 'App\Http\Controllers\UserController@
 Route::get('/resume/{user:username}/{resume}', 'App\Http\Controllers\ResumeController@show')->name('resume.view-resume');
 
 // Preview Resume Template
-Route::get('/preview/resume/{template}', 'App\Http\Controllers\ResumeController@previewResume')->name('resume.preview-resume');
+Route::get('/preview/resume/{template}', 'App\Http\Controllers\PreviewResumeController@show')->name('resume.preview-resume');
