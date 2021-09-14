@@ -18,7 +18,7 @@
         <div class="justify-content-center mt-5">
             {{-- checking either it is create new resume or edit resume settings --}}
             @if($resume ?? '')
-                <form action="{{ route('resume.update-resume-settings') }}" method="POST">
+                <form action="{{ route('resume.update-resume-settings', $resume) }}" method="POST">
             @else
                 <form action="{{ route('resume.create-new-resume') }}" method="POST">
             @endif

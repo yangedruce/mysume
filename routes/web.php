@@ -31,11 +31,9 @@ Route::middleware(['auth', 'verified'])->group(function (){
     // Edit password page
     Route::view('/password/edit', 'profile.edit-password')->name('password.edit');
 
-    // View Edit Resume - Settings
-    Route::get('/resume/edit/settings/{resume_id}', 'App\Http\Controllers\ResumeController@viewEditResumeSettings')->name('resume.view-edit-resume-settings');
-
-    // Update Resume - Settings
-    Route::post('/resume/update/settings', 'App\Http\Controllers\ResumeController@updateResumeSettings')->name('resume.update-resume-settings');
+    // Resume Settings
+    Route::get('/resume/edit/settings/{resume}', 'App\Http\Controllers\ResumeSettingsController@edit')->name('resume.view-edit-resume-settings');
+    Route::post('/resume/{resume}/settings', 'App\Http\Controllers\ResumeSettingsController@update')->name('resume.update-resume-settings');
 
     // Add New Job
     Route::post('/resume/add/job', 'App\Http\Controllers\ResumeController@addJob')->name('resume.add-job');
