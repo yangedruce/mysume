@@ -4,11 +4,13 @@ namespace App\Models;
 
 class Job extends Model
 {
-    public function task() {
+    public function tasks()
+    {
         return $this->hasMany(JobTask::class);
     }
 
-    public function achievement() {
+    public function achievements()
+    {
         return $this->hasMany(JobAchievement::class);
     }
 }

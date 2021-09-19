@@ -1,13 +1,13 @@
 {
-    "name": "mkfizi/fortify",
+    "name": "yangedruce/mysume",
     "type": "project",
-    "description": "Laravel 8 authentication boilerplate using Laravel Fortify package and stylized with Bootstrap 5 CSS framework.",
+    "description": "Mysume is a resume builder developed using Laravel 8 and stylized with Bootstrap 5. It features a resume builder with selectable template which can be shared and viewed publicly.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "authors": [
         {
-            "name": "mkfizi",
-            "email": "mkfizi93@gmail.com"
+            "name": "yangedruce",
+            "email": "nurulizyansyaza@gmail.com"
         }
     ],
     "require": {

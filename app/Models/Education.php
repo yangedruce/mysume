@@ -4,7 +4,8 @@ namespace App\Models;
 
 class Education extends Model
 {
-    public function achievement() {
+    public function achievements()
+    {
         return $this->hasMany(EducationAchievement::class);
     }
 }
