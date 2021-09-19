@@ -37,9 +37,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {
-            if($user!=null) {
-                if($input['image'] ?? '' ){
-                    if(auth()->user()->profile_picture != NULL){
+            if ($user!=null) {
+                if ($input['image'] ?? '') {
+                    if (auth()->user()->profile_picture != null) {
                         Storage::delete('public/profilepicture/'.auth()->user()->profile_picture);
                     }
                     $profilePicture = time().'_'.auth()->user()->username. '_' . $input['image']->getClientOriginalName();
@@ -47,7 +47,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 }
             }
 
-            if($input['image'] ?? '' ){
+            if ($input['image'] ?? '') {
                 $user->forceFill([
                     'fullname'          => $input['name'],
                     'username'          => $input['username'],
@@ -56,8 +56,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                     'location'          => $input['userlocation'],
                     'website'           => $input['userwebsite'],
                     'profile_picture'   => $profilePicture,
-                ])->save();    
-            }else {
+                ])->save();
+            } else {
                 $user->forceFill([
                     'fullname'          => $input['name'],
                     'username'          => $input['username'],
@@ -65,7 +65,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                     'email'             => $input['email'],
                     'location'          => $input['userlocation'],
                     'website'           => $input['userwebsite'],
-                ])->save();    
+                ])->save();
             }
 
             request()->session()->flash('success', 'Profile information updated.');

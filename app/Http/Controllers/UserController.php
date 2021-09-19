@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function home() {
+    public function home()
+    {
         return view('home', ['resumes' => auth()->user()->resumes]);
     }
 
-    public function usernameExists(Request $request) {
+    public function usernameExists(Request $request)
+    {
         $query = User::where('username', $request->username);
 
-        if(auth()->check()){
+        if (auth()->check()) {
             $query->where('username', '!=', auth()->user()->username);
         }
 

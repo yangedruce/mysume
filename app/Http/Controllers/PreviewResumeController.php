@@ -8,15 +8,13 @@ use App\Models\Job;
 use App\Models\JobTask;
 use App\Models\JobAchievement;
 use App\Models\Resume;
-use App\Models\Template;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class PreviewResumeController extends Controller
 {
     // Preview resume with dummy data
-    public function show($template) {
+    public function show($template)
+    {
         // user
         $user                   = new User;
         $user->fullname         = 'James Ethan';
