@@ -91,10 +91,10 @@
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $job->title }}</p>
 
                                             {{-- job task --}}
-                                            @if(count($job->task)>0)
+                                            @if(count($job->tasks)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Tasks/Responsibilities</p>
                                                 <ul class="my-2">
-                                                    @foreach($job->task as $task)
+                                                    @foreach($job->tasks as $task)
                                                         <li class="ff-roboto text-dark text-12">
                                                             {{ $task->task_name }}
                                                         </li>
@@ -103,10 +103,10 @@
                                             @endif
 
                                             {{-- job achievements --}}
-                                            @if(count($job->achievement)>0)
+                                            @if(count($jobs->achievements)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
-                                                    @foreach($job->achievement as $achievement)
+                                                    @foreach($job->achievements as $achievement)
                                                         <li class="ff-roboto text-dark text-12">
                                                             {{ $achievement->achievement_name }}
                                                         </li>
@@ -149,10 +149,10 @@
                                             <p class="ff-roboto-mono text-grey-dark fw-bold text-12 mb-3">{{ $education->degree }}</p>
 
                                             {{-- education achievements --}}
-                                            @if(count($education->achievement)>0)
+                                            @if(count($education->achievements)>0)
                                                 <p class="ff-roboto text-grey-dark fw-bold text-12 mb-0">Achievements</p>
                                                 <ul class="my-2">
-                                                    @foreach($education->achievement as $achievement)
+                                                    @foreach($education->achievements as $achievement)
                                                         <li class="ff-roboto text-dark text-12">
                                                             {{ $achievement->achievement_name }}
                                                         </li>

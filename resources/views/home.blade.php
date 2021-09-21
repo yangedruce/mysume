@@ -85,7 +85,7 @@
 </div>
 
 {{-- Start delete modal --}}
-<form action="{{ route('resume.delete', $resume) }}" method="POST">
+<form action="{{ route('resume.delete', $resume) }}" method="POST"> {{-- have error to return to dashboard --}}
     @csrf
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

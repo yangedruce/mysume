@@ -327,29 +327,33 @@
                                     </button>
                                 </div>
 
-                                <input type="hidden" id="addJobTaskNo-{{$no}}" name="task_no" value="{{ count($job->task) }}">
-                                <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-{{$no}} small
-                                @if(count($job->task)>0)
-                                    d-none
-                                @endif
-                                ">You have no job task yet. Please add a new job task.</p>
+                                {{-- @dd($jobs) --}}
 
-                                <div id="addJobTask-{{$no}}">
-                                    @foreach($job->task as $i => $task)
-                                        <div class="input-group my-3" id="jobTask-{{$no}}-{{++$i}}">
-                                            <input type="hidden" name="job_task_id_{{$i}}" value="{{ $task->id }}">
-                                            <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobTask-{{$no}}-{{$i}}" name="job_task_{{$i}}" value="{{ $task->task_name }}">
-                                            <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 input-delete">
-                                                <button type="button" class="btn" id="btnJobTask-{{$no}}-{{$i}}" onclick="removeTask({{$no}}, {{$i}})">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>
-                                                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
-                                                    </svg>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                @if($job->tasks ?? '')
+                                    <input type="hidden" id="addJobTaskNo-{{$no}}" name="task_no" value="{{ count($job->tasks) }}">
+                                    <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-{{$no}} small
+                                    @if(count($job->tasks)>0)
+                                        d-none
+                                    @endif
+                                    ">You have no job task yet. Please add a new job task.</p>
+
+                                    <div id="addJobTask-{{$no}}">
+                                        @foreach($job->tasks as $i => $task)
+                                            <div class="input-group my-3" id="jobTask-{{$no}}-{{++$i}}">
+                                                <input type="hidden" name="job_task_id_{{$i}}" value="{{ $task->id }}">
+                                                <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobTask-{{$no}}-{{$i}}" name="job_task_{{$i}}" value="{{ $task->task_name }}">
+                                                <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 input-delete">
+                                                    <button type="button" class="btn" id="btnJobTask-{{$no}}-{{$i}}" onclick="removeTask({{$no}}, {{$i}})">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M8.83301 4.1665L8.24967 4.74984H5.33301V5.9165H5.91634V14.6665C5.91634 14.9718 6.02799 15.2817 6.24902 15.5005C6.46777 15.7215 6.77767 15.8332 7.08301 15.8332H12.9163C13.2217 15.8332 13.5316 15.7215 13.7526 15.5005C13.9714 15.2817 14.083 14.9718 14.083 14.6665V5.9165H14.6663V4.74984H11.7497L11.1663 4.1665H8.83301ZM7.08301 5.9165H12.9163V14.6665H7.08301V5.9165ZM8.24967 7.08317V13.4998H9.41634V7.08317H8.24967ZM10.583 7.08317V13.4998H11.7497V7.08317H10.583Z" fill="#4C4EAF"/>
+                                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#4C4EAF"/>
+                                                        </svg>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
 
                                 {{-- Add/delete job achievement --}}
                                 <div class="d-flex justify-content-between align-items-center mt-5">
@@ -362,15 +366,15 @@
                                     </button>
                                 </div>
 
-                                <input type="hidden" id="addJobAchievementNo-{{$no}}" name="job_achievement_no" value="{{ count($job->achievement) }}">
+                                <input type="hidden" id="addJobAchievementNo-{{$no}}" name="job_achievement_no" value="{{ count($job->achievements) }}">
                                 <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-achievement-{{$no}} small
-                                @if(count($job->achievement)>0)
+                                @if(count($job->achievements)>0)
                                     d-none
                                 @endif
                                 ">You have no job achievement yet. Please add a new job achievement.</p>
 
                                 <div id="addJobAchievement-{{$no}}">
-                                    @foreach($job->achievement as $i => $achievement)
+                                    @foreach($job->achievements as $i => $achievement)
                                         <div class="input-group my-3" id="jobAchievement-{{$no}}-{{++$i}}">
                                             <input type="hidden" name="job_achievement_id_{{$i}}" value="{{ $achievement->id }}">
                                             <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobAchievement-{{$no}}-{{$i}}" name="job_achievement_{{$i}}" value="{{ $achievement->achievement_name }}">
@@ -617,18 +621,18 @@
                                     </button>
                                 </div>
 
-                                <input type="hidden" id="addEducationAchievementNo-{{$no}}" name="education_achievement_no" value="{{ count($education->achievement) }}">
+                                <input type="hidden" id="addEducationAchievementNo-{{$no}}" name="education_achievement_no" value="{{ count($education->achievements) }}">
                                 <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-education-achievement-{{$no}} small
-                                @if(count($education->achievement)>0)
+                                @if(count($education->achievements)>0)
                                     d-none
                                 @endif
                                 ">You have no education achievement yet. Please add a new education achievement.</p>
 
                                 <div id="addEducationAchievement-{{$no}}">
-                                    @foreach($education->achievement as $i => $achievement)
+                                    @foreach($education->achievements as $i => $achievement)
                                         <div class="input-group my-3" id="educationAchievement-{{$no}}-{{++$i}}">
                                             <input type="hidden" name="education_achievement_id_{{$i}}" value="{{ $achievement->id }}">
-                                            <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputEducationAchievement-{{$no}}-{{$i}}" name="education_achievement_{{$i}}" value="{{ $achievement->achievement_name }}">
+                                            <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputEducationAchievement-{{$no}}-{{$i}}" name="education_achievement[]" value="{{ $achievement->achievement_name }}">
                                             <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 input-delete">
                                                 <button type="button" class="btn" id="btnEducationAchievement-{{$no}}-{{$i}}" onclick="removeEducationAchievement({{$no}}, {{$i}})">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -949,7 +953,7 @@
 
         var html = $('#addEducationAchievement-'+id).html()+
                     '<div class="input-group my-3" id="educationAchievement-'+id+'-'+addEducationAchievementNo+'">'+
-                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputEducationAchievement-'+id+'-'+addEducationAchievementNo+'" name="education_achievement_'+addEducationAchievementNo+'" value="">'+
+                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputEducationAchievement-'+id+'-'+addEducationAchievementNo+'" name="education_achievement[]" value="">'+
                         '<span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0" style="border: 1px solid #C4C4C4;">'+
                             '<button type="button" class="btn" onclick="removeEducationAchievement('+id+', '+addEducationAchievementNo+')" id="btnEducationAchievement-'+id+'-'+addEducationAchievementNo+'">'+
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+
