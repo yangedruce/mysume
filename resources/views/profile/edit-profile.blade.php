@@ -7,9 +7,7 @@
     <div class="col-12 col-xl-6">
         <div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
             <div>
-                <h1 class="text-dark fs-4 ff-days-one">
-                    My Profile
-                </h1>
+                <h1 class="text-dark fs-4 ff-days-one">My Profile</h1>
                 <p class="ff-monserrat d-block text-grey-dark small">Profile details will be displayed on resume</p>
             </div>
             <a href="{{ route('password.edit') }}">
@@ -17,12 +15,9 @@
             </a>
         </div>
 
-        {{-- edit profile --}}
         <div class="justify-content-center mt-5">
             <div class="main-container justify-content-center">
-
                 @include('profile.forms.profile')
-                
             </div>
         </div>
     </div>
