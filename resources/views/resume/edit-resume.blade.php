@@ -1,16 +1,15 @@
 @extends('layouts.navbar')
 
-@section('title')
-{{ __('Edit Resume') }}
-@endsection
+@section('title', 'Edit Resume')
 
 @section('content')
+@dump($errors)
 <div class="row justify-content-center mt-4">
     <div class="col-12 col-xl-6">
         <div class="d-flex justify-content-between flex-column flex-md-row">
             <h1 class="text-dark fs-4 ff-days-one">Edit Resume</h1>
             <a href="{{ route('home') }}" class="align-self-center">
-                <button type="button" class="btn btn-main btn-width text-white ff-montserrat"><small>{{ __('Return to Dashboard') }}</small></button>
+                <button type="button" class="btn btn-main btn-width text-white ff-montserrat"><small>Return to Dashboard</small></button>
             </a>
         </div>
 
@@ -71,7 +70,7 @@
                 <div class="input-group mt-3">
                     <input type="text" class="form-control py-1 ff-montserrat border-end-0 copy-link" id="url" value="{{ route('resume.view-resume', ['user' => Auth::user()->username, 'resume' => $resume->id]) }}">
                     <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 copy-link-2">
-                        <button type="button" onclick="copyLink()" class="btn text-blue-dark fw-bold ff-montserrat"><small>{{ __('Copy link') }}</small></button>
+                        <button type="button" onclick="copyLink()" class="btn text-blue-dark fw-bold ff-montserrat"><small>Copy link</small></button>
                     </span>
                 </div>
 
@@ -85,7 +84,7 @@
             <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="triggerAddJob()">
                 <small>
                     <span class="me-2">+</span>
-                    {{ __('Add Job') }}
+                    Add Job
                 </small>
             </button>
         </div>
@@ -134,7 +133,7 @@
                             </div>
                             <div class="form-check mx-2 mt-1">
                                 <input type="checkbox" class="form-check-input" id="checkboxCurrent-0" name="current" onchange="triggerCheckBox(0)">
-                                <label class="form-check-label ff-montserrat text-dark text-10" for="checkboxCurrent">{{ __('Currently Work Here') }}</label>
+                                <label class="form-check-label ff-montserrat text-dark text-10" for="checkboxCurrent">Currently Work Here</label>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center" id="endDate-0">
@@ -167,12 +166,12 @@
                             <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addTask(0)">
                                 <small>
                                     <span class="me-2">+</span>
-                                    {{ __('Add Task') }}
+                                    Add Task
                                 </small>
                             </button>
                         </div>
 
-                        <input type="hidden" id="addJobTaskNo-0" name="task_no" value="0">
+                        <input type="hidden" id="addJobTaskNo-0" name="task[]" value="0">
                         <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-0 small">You have no job task yet. Please add a new job task.</p>
 
                         <div id="addJobTask-0"></div>
@@ -183,19 +182,19 @@
                             <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addJobAchievement(0)">
                                 <small>
                                     <span class="me-2">+</span>
-                                    {{ __('Add Achievement') }}
+                                    Add Achievement
                                 </small>
                             </button>
                         </div>
 
-                        <input type="hidden" id="addJobAchievementNo-0" name="job_achievement_no" value="0">
+                        <input type="hidden" id="addJobAchievementNo-0" name="job_achievement[]" value="0">
                         <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-achievement-0 small">You have no job achievement yet. Please add a new job achievement.</p>
 
                         <div id="addJobAchievement-0"></div>
                     </div>
                     <div class="d-flex justify-content-center py-5">
-                        <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>{{ __('Add Job') }}</small></button>
-                        <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelAddJob()"><small>{{ __('Cancel') }}</small></button>
+                        <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>Add Job</small></button>
+                        <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelAddJob()"><small>Cancel</small></button>
                     </div>
                 </form>
             </div>
@@ -226,7 +225,7 @@
                                     @if(!$job->currently_work)
                                         {{ $end_month." ".$end_year }}
                                     @else
-                                        {{ 'Present' }}
+                                        Present
                                     @endif
                                 </span>
                             </p>
@@ -289,7 +288,7 @@
                                     </div>
                                     <div class="form-check mx-2 mt-1">
                                         <input type="checkbox" class="form-check-input" id="checkboxCurrent-{{$no}}" name="current" onchange="triggerCheckBox({{$no}})" @if($job->currently_work) checked @endif>
-                                        <label class="form-check-label ff-montserrat text-dark text-10" for="checkboxCurrent">{{ __('Currently Work Here') }}</label>
+                                        <label class="form-check-label ff-montserrat text-dark text-10" for="checkboxCurrent">Currently Work Here</label>
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center @if($job->currently_work) d-none @endif" id="endDate-{{$no}}">
@@ -322,7 +321,7 @@
                                     <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addTask({{$no}})">
                                         <small>
                                             <span class="me-2">+</span>
-                                            {{ __('Add Task') }}
+                                            Add Task
                                         </small>
                                     </button>
                                 </div>
@@ -330,7 +329,7 @@
                                 {{-- @dd($jobs) --}}
 
                                 @if($job->tasks ?? '')
-                                    <input type="hidden" id="addJobTaskNo-{{$no}}" name="task_no" value="{{ count($job->tasks) }}">
+                                    <input type="hidden" id="addJobTaskNo-{{$no}}" name="task[]" value="{{ count($job->tasks) }}">
                                     <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-task-{{$no}} small
                                     @if(count($job->tasks)>0)
                                         d-none
@@ -341,7 +340,7 @@
                                         @foreach($job->tasks as $i => $task)
                                             <div class="input-group my-3" id="jobTask-{{$no}}-{{++$i}}">
                                                 <input type="hidden" name="job_task_id_{{$i}}" value="{{ $task->id }}">
-                                                <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobTask-{{$no}}-{{$i}}" name="job_task_{{$i}}" value="{{ $task->task_name }}">
+                                                <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobTask-{{$no}}-{{$i}}" name="job_task[]" value="{{ $task->task_name }}">
                                                 <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 input-delete">
                                                     <button type="button" class="btn" id="btnJobTask-{{$no}}-{{$i}}" onclick="removeTask({{$no}}, {{$i}})">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -361,12 +360,12 @@
                                     <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addJobAchievement({{$no}})">
                                         <small>
                                             <span class="me-2">+</span>
-                                            {{ __('Add Achievement') }}
+                                            Add Achievement
                                         </small>
                                     </button>
                                 </div>
 
-                                <input type="hidden" id="addJobAchievementNo-{{$no}}" name="job_achievement_no" value="{{ count($job->achievements) }}">
+                                <input type="hidden" id="addJobAchievementNo-{{$no}}" name="job_achievement[]" value="{{ count($job->achievements) }}">
                                 <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-job-achievement-{{$no}} small
                                 @if(count($job->achievements)>0)
                                     d-none
@@ -377,7 +376,7 @@
                                     @foreach($job->achievements as $i => $achievement)
                                         <div class="input-group my-3" id="jobAchievement-{{$no}}-{{++$i}}">
                                             <input type="hidden" name="job_achievement_id_{{$i}}" value="{{ $achievement->id }}">
-                                            <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobAchievement-{{$no}}-{{$i}}" name="job_achievement_{{$i}}" value="{{ $achievement->achievement_name }}">
+                                            <input type="text" class="form-control ff-montserrat border-end-0 py-1 input-delete small" id="inputJobAchievement-{{$no}}-{{$i}}" name="job_achievement[]" value="{{ $achievement->achievement_name }}">
                                             <span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0 input-delete">
                                                 <button type="button" class="btn" id="btnJobAchievement-{{$no}}-{{$i}}" onclick="removeJobAchievement({{$no}}, {{$i}})">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -391,8 +390,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center py-5">
-                                <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>{{ __('Save') }}</small></button>
-                                <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelEditJob({{$no}})"><small>{{ __('Cancel') }}</small></button>
+                                <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>Save</small></button>
+                                <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelEditJob({{$no}})"><small>Cancel</small></button>
                             </div>
                         </form>
                     </div>
@@ -407,7 +406,7 @@
             <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="triggerAddEducation()">
                 <small>
                     <span class="me-2">+</span>
-                    {{ __('Add Education ') }}
+                    Add Education
                 </small>
             </button>
         </div>
@@ -485,19 +484,19 @@
                             <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addEducationAchievement(0)">
                                 <small>
                                     <span class="me-2">+</span>
-                                    {{ __('Add Achievement') }}
+                                    Add Achievement
                                 </small>
                             </button>
                         </div>
 
-                        <input type="hidden" id="addEducationAchievementNo-0" name="education_achievement_no" value="0">
+                        <input type="hidden" id="addEducationAchievementNo-0" name="education_achievement[]" value="0">
                         <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-education-achievement-0 small">You have no education achievement yet. Please add a new education achievement.</p>
 
                         <div id="addEducationAchievement-0"></div>
                     </div>
                     <div class="d-flex justify-content-center py-5">
-                        <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>{{ __('Add Education') }}</small></button>
-                        <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelAddEducation()"><small>{{ __('Cancel') }}</small></button>
+                        <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>Add Education</small></button>
+                        <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelAddEducation()"><small>Cancel</small></button>
                     </div>
                 </form>
             </div>
@@ -616,12 +615,12 @@
                                     <button type="button" class="btn text-blue-dark fw-bold ff-montserrat" onclick="addEducationAchievement({{$no}})">
                                         <small>
                                             <span class="me-2">+</span>
-                                            {{ __('Add Achievement') }}
+                                            Add Achievement
                                         </small>
                                     </button>
                                 </div>
 
-                                <input type="hidden" id="addEducationAchievementNo-{{$no}}" name="education_achievement_no" value="{{ count($education->achievements) }}">
+                                <input type="hidden" id="addEducationAchievementNo-{{$no}}" name="education_achievement[]" value="{{ count($education->achievements) }}">
                                 <p class="main-input mt-4 w-100 text-center text-grey-dark ff-montserrat no-education-achievement-{{$no}} small
                                 @if(count($education->achievements)>0)
                                     d-none
@@ -646,8 +645,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center py-5">
-                                <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>{{ __('Save') }}</small></button>
-                                <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelEditEducation({{$no}})"><small>{{ __('Cancel') }}</small></button>
+                                <button type="submit" class="btn btn-main btn-width me-3 text-white"><small>Save</small></button>
+                                <button type="button" class="btn btn-main-blue btn-width text-blue-dark" onclick="cancelEditEducation({{$no}})"><small>Cancel</small></button>
                             </div>
                         </form>
                     </div>
@@ -677,7 +676,11 @@
 {{-- End delete modal --}}
 
 {{-- Start delete job/education modal --}}
-<form action="{{ route('resume.delete-job-education') }}" method="POST">
+{{-- @if($resume ?? '') --}}
+{{-- <form action="{{ route('resume.delete-education', $resume) }}" method="POST"> --}}
+{{-- @else --}}
+<form action="{{ route('resume.delete-job') }}" method="POST">
+{{-- @endif --}}
     @csrf
     <div class="modal fade" id="deleteJobEducationModal" tabindex="-1" aria-labelledby="deleteJobEducationModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -687,8 +690,8 @@
                     <input type="hidden" id="deleteType" name="type">
                     <input type="hidden" id="deleteJobEducationId" name="id">
                     <p class="modal-title fw-bold fs-2 text-dark ff-days-one" id="deleteJobEducationModalLabel">Are you sure to delete <span id="deleteJobEducationTitle"></span>?</p>
-                    <button type="submit" class="btn btn-main text-white mt-3 w-100"><small>{{ __('Delete') }}</small></button>
-                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>{{ __('Cancel') }}</small></button>
+                    <button type="submit" class="btn btn-main text-white mt-3 w-100"><small>Delete</small></button>
+                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>Cancel</small></button>
                 </div>
             </div>
         </div>
@@ -707,7 +710,7 @@
                     <input type="hidden" id="status" name="status">
                     <p class="modal-title fw-bold fs-2 text-dark ff-days-one" id="statusModalLabel">Are you sure to <span id="statusTitle"></span> this resume?</p>
                     <button type="submit" class="btn btn-main text-white mt-3 w-100"><small id="statusBtn"></small></button>
-                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>{{ __('Cancel') }}</small></button>
+                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>Cancel</small></button>
                 </div>
             </div>
         </div>
@@ -747,7 +750,7 @@
 
         var html = $('#addJobTask-'+id).html()+
                     '<div class="input-group my-3" id="jobTask-'+id+'-'+addJobTaskNo+'">'+
-                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputJobTask-'+id+'-'+addJobTaskNo+'" name="job_task_'+addJobTaskNo+'" value="">'+
+                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputJobTask-'+id+'-'+addJobTaskNo+'" name="job_task[]" value="">'+
                         '<span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0" style="border: 1px solid #C4C4C4;">'+
                             '<button type="button" class="btn" onclick="removeTask('+id+', '+addJobTaskNo+')" id="btnJobTask-'+id+'-'+addJobTaskNo+'">'+
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+
@@ -825,7 +828,7 @@
 
         var html = $('#addJobAchievement-'+id).html()+
                     '<div class="input-group my-3" id="jobAchievement-'+id+'-'+addJobAchievementNo+'">'+
-                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputJobAchievement-'+id+'-'+addJobAchievementNo+'" name="job_achievement_'+addJobAchievementNo+'" value="">'+
+                        '<input type="text" class="form-control ff-montserrat border-end-0 py-1 small" style="border: 1px solid #C4C4C4;" id="inputJobAchievement-'+id+'-'+addJobAchievementNo+'" name="job_achievement[]" value="">'+
                         '<span class="input-group-text py-1 bg-transparent m-0 p-0 border-start-0" style="border: 1px solid #C4C4C4;">'+
                             '<button type="button" class="btn" onclick="removeJobAchievement('+id+', '+addJobAchievementNo+')" id="btnJobAchievement-'+id+'-'+addJobAchievementNo+'">'+
                                 '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">'+

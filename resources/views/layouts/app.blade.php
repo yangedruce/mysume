@@ -9,13 +9,16 @@
     <title>@yield('title') | {{ __('Mysume') }}</title>
 
     {{-- Bootstrap CSS --}}
-    <link href="{{ asset('assets/css') }}/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Days+One&family=Montserrat&display=swap" rel="stylesheet">    
     
     {{-- Custom CSS --}}
-    <link href="{{ asset('assets/css') }}/style.css" rel="stylesheet">
+    <link href="{{ asset('scss/style.css') }}" rel="stylesheet">
+
+    {{-- Script --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
 <body>
@@ -31,10 +34,6 @@
     {{-- content --}}
     @yield('content')
     
-    <script src="{{ asset('assets/js') }}/popper.min.js"></script>
-    <script src="{{ asset('assets/js') }}/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('assets/js') }}/script.js"></script>
     @stack('js')
 </body>
 </html>

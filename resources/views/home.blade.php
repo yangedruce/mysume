@@ -27,13 +27,3 @@
 
     @include('resume.partials.delete-modal')
 @endsection
-
-@push('js')
-<script>
-    function triggerDelete(id, title, action) {
-        $('#deleteTitle').html(title);
-        $('#deleteId').val(id);
-        $('#deleteForm').attr('action', action);
-    }
-</script>
-@endpush

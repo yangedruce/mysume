@@ -38,10 +38,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Job
     Route::post('/resume/add/job', 'App\Http\Controllers\JobExperienceController@store')->name('resume.add-job');
     Route::post('/resume/edit/job', 'App\Http\Controllers\JobExperienceController@update')->name('resume.edit-job');
+    Route::post('/resume/delete/job', 'App\Http\Controllers\JobExperienceController@destroy')->name('resume.delete-job');
 
     // Education
     Route::post('/resume/add/education', 'App\Http\Controllers\EducationController@store')->name('resume.add-education');
     Route::post('/resume/edit/education', 'App\Http\Controllers\EducationController@update')->name('resume.edit-education');
+    Route::post('/resume/delete/education', 'App\Http\Controllers\EducationController@destroy')->name('resume.delete-education');
 
     // Delete Job/Education
     Route::post('/resume/delete/job-education', 'App\Http\Controllers\JobEducationDeleteController@destroy')->name('resume.delete-job-education');

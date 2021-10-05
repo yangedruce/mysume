@@ -58,15 +58,24 @@ class EducationController extends Controller
             'end_year' => $request->end_year
         ]);
 
-        $education->achievements()->delete();
-
         foreach ($request->get('education_achievement') as $achievement) {
             $education->achievements()->create([
                 'achievement_name' => $achievement
             ]);
         }
 
+        $education->achievements()->delete();
+
         return redirect()->route('resume.view-edit-resume', $education->resume_id)
             ->with('success', 'Education ' . $request->school . ' has been updated.');
+    }
+
+    public function destroy(Request $request)
+    {
+        Education::where('id', $request->id)->where('resume_id', $request->resume_id)->first()->delete();
+            
+        EducationAchievement::where('education_id', $request->education_id)->get()->achievements()->each->delete();
+
+        return redirect()->route('resume.view-edit-resume', $request->resume_id)->with('success', $request->school.' has been deleted.');
     }
 }
