@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\EducationAchievement;
+use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -11,6 +12,10 @@ class EducationController extends Controller
 {
     public function store(Request $request)
     {
+        if($request->resume_id !== auth()->user()->id){
+            abort(403);
+        }
+
         $request->validate([
             'resume_id' => 'required',
             'school' => 'required',
@@ -46,7 +51,15 @@ class EducationController extends Controller
 
     public function update(Request $request)
     {
-        $education = Education::where('id', $request->education_id)->first();
+        if($request->resume_id !== auth()->user()->id){
+            abort(403);
+        }
+
+        $resume = Resume::findOrFail($request->resume_id);
+
+        $education = $resume->educations()->where('id', $request->education_id)->first();
+
+        // TODO: Validation
 
         $education->update([
             'school' => $request->school,
@@ -72,10 +85,17 @@ class EducationController extends Controller
 
     public function destroy(Request $request)
     {
-        Education::where('id', $request->id)->where('resume_id', $request->resume_id)->first()->delete();
-            
-        EducationAchievement::where('education_id', $request->education_id)->get()->achievements()->each->delete();
+        $education = Education::findOrFail($request->id);
 
-        return redirect()->route('resume.view-edit-resume', $request->resume_id)->with('success', $request->school.' has been deleted.');
+        if($education->resume->user_id !== auth()->user()->id){
+            abort(403);
+        }
+
+        $education->achievements()->delete();
+
+        $education->delete();
+
+        return redirect()->route('resume.view-edit-resume', $education->resume_id)
+            ->with('success', $request->school.' has been deleted.');
     }
 }

@@ -8,4 +8,8 @@ class Education extends Model
     {
         return $this->hasMany(EducationAchievement::class);
     }
+
+    public function resume(){
+        return $this->belongsTo(Resume::class);
+    }
 }
