@@ -6,8 +6,8 @@
                 <div class="modal-body p-5">
                     <input type="hidden" id="deleteId" name="resume_id">
                     <p class="modal-title fw-bold fs-2 text-dark ff-days-one" id="deleteModalLabel">Are you sure to delete <span id="deleteTitle"></span>?</p>
-                    <button type="submit" class="btn btn-main text-white mt-3 w-100"><small>{{ __('Delete') }}</small></button>
-                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>{{ __('Cancel') }}</small></button>
+                    <button type="submit" class="btn btn-main text-white mt-3 w-100"><small>Delete</small></button>
+                    <button type="button" class="btn btn-main-blue text-blue-dark mt-3 w-100" data-bs-dismiss="modal"><small>Cancel</small></button>
                 </div>
             </div>
         </div>
