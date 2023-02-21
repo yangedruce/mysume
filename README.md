@@ -52,6 +52,6 @@ php artisan storage:link
 
 [The wireframes and design](https://www.figma.com/file/zsQqGrYLO1sjGQWb6hBSoF/Resume-Builder-Mysume?node-id=0%3A1)
 
-You may view the app live [here](https://www.mysume.com/)
+You may view the app live [here](https://www.mysume.yangedruce.com/)
 
 That's it! Your own Mysume app is now ready.
