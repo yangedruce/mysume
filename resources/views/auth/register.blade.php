@@ -171,7 +171,7 @@
             data: {'username': $('#userName').val()},
             success: function(response)
             {
-                if(response) {
+                if(response.status) {
                     $('#usernameExist').removeClass('d-none');
                     $('#userName').val('');
                 }else {
@@ -189,7 +189,7 @@
             data: {'username': $('#userName').val()},
             success: function(response)
             {
-                if(response) {
+                if(response.status) {
                     $('#usernameExist').removeClass('d-none');
                     $('#userName').val('');
                     $('#loading').addClass('d-none');
